@@ -12,11 +12,10 @@ public class MarketingStrategyManager {
     }
 
     public void createStrategy(MarketingStrategy strategy) {
-    	//your code goes here
+        strategies.add(strategy);
     }
 
     public MarketingStrategy getStrategyByName(String name) {
-    	//your code goes here
         return strategies.stream()
                 .filter(strategy -> strategy.getName().equals(name))
                 .findFirst()
@@ -24,23 +23,26 @@ public class MarketingStrategyManager {
     }
 
     public void updateStrategy(MarketingStrategy updatedStrategy) {
-    	//your code goes here
+        for (int i = 0; i < strategies.size(); i++) {
+            MarketingStrategy strategy = strategies.get(i);
+            if (strategy.getName().equals(updatedStrategy.getName())) {
+                strategies.set(i, updatedStrategy);
+                break;
+            }
+        }
     }
 
     public void deleteStrategy(String name) {
-    	//your code goes here
+        strategies.removeIf(strategy -> strategy.getName().equals(name));
     }
 
     public List<MarketingStrategy> getStrategiesInBudgetRange(double minBudget, double maxBudget) {
-    	//your code goes here
         return strategies.stream()
                 .filter(strategy -> strategy.getBudget() >= minBudget && strategy.getBudget() <= maxBudget)
                 .collect(Collectors.toList());
     }
 
     public List<MarketingStrategy> getAllStrategies() {
-    	//your code goes here
         return new ArrayList<>(strategies);
     }
 }
-
